@@ -74,10 +74,7 @@
 
   @keyframes newWindow {
     0% {
-      transform: translateY(100%) scale(0.1);
-    }
-    70% {
-      transform: translateY(15%) scale(0.8);
+      transform: translateY(100%) scale(0);
     }
     100% {
       transform: translateY(0) scale(1);
