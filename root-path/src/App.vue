@@ -1,13 +1,13 @@
 <template>
   <div id="app">
 
-    <nav id="nav" class="nav" :class="{ active: isActive }">
+    <nav id="nav" class="nav" :class="{ active: isActive, inactive: firstState }">
       <ul class="nav__list">
-        <li class="nav__list__item">
+        <li class="nav__list__item" @click="toggleMenu()">
           <router-link to="/">Home</router-link>
         </li>
-        <li class="nav__list__item">
-          <router-link to="/gallery">Gallery</router-link>
+        <li class="nav__list__item" @click="toggleMenu()">
+          <router-link to="/works">Gallery</router-link>
         </li>
       </ul>
       <button id="menuButton" class="menu-button" @click="toggleMenu()">
@@ -28,12 +28,14 @@
     },
     data() {
       return {
-        isActive: false
+        isActive: false,
+        firstState: true
       }
     },
     methods: {
       toggleMenu() {
         this.isActive = !this.isActive;
+        this.firstState = false;
       }
     }
   }
@@ -60,9 +62,14 @@
   }
 
   @keyframes menuDown {
-    0% {transform: translateY(-100px)}
-    30% {transform: translateY(-90px)}
-    100% {transform: translateY(0)}
+    0% {transform: translateY(-110px)}
+    50% {transform: translateY(-120px)}
+    100% {transform: translateY(-15px)}
+  }
+  @keyframes menuUp {
+    0% {transform: translateY(-15px)}
+    50% {transform: translateY(0px)}
+    100% {transform: translateY(-110px)}
   }
 
   #app {
@@ -74,14 +81,20 @@
     nav {
       text-align: center;
       background: #d1f2f3;
-      padding-bottom: 15px;
-      transform: translateY(-95px);
+      padding: 15px 0;
       transition: 0.3s;
+      animation: menuUp 0.5s;
+      animation-fill-mode: both;
 
       &.active {
         animation: menuDown 0.5s;
         animation-fill-mode: forwards;
       }
+      &.inactive {
+        animation: none;
+        transform: translateY(-110px);
+      }
+
 
       .nav__list {
         margin: 0;
