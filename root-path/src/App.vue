@@ -15,7 +15,7 @@
       </button>
     </nav>
 
-    <router-view></router-view>
+    <router-view class="router"></router-view>
   </div>
 </template>
 
@@ -72,6 +72,18 @@
     100% {transform: translateY(-110px)}
   }
 
+  @keyframes newWindow {
+    0% {
+      transform: translateY(100%) scale(0.1);
+    }
+    70% {
+      transform: translateY(15%) scale(0.8);
+    }
+    100% {
+      transform: translateY(0) scale(1);
+    }
+  }
+
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -88,6 +100,7 @@
       text-align: center;
       background: #d1f2f3;
       padding: 15px 0;
+      z-index: 1;
       transition: 0.3s;
       animation: menuUp 0.5s;
       animation-fill-mode: both;
@@ -151,6 +164,9 @@
           outline: 2px solid #6cbdbf;
         }
       }
+    }
+    .router {
+      animation: newWindow 1s 0.5s both;
     }
   }
 
