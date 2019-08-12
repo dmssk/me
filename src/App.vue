@@ -1,7 +1,7 @@
 <template>
   <div id="app">
 
-    <nav id="nav" class="nav" :class="{ active: isActive, inactive: firstState }" v-click-outside="clickOutside">
+    <nav id="nav" class="nav" :class="{ active: isActive, inactive: firstState }" v-click-outside="closeNav">
       <ul class="nav__list">
         <li class="nav__list__item" @click="toggleMenu()">
           <router-link to="/">Home</router-link>
@@ -15,10 +15,11 @@
       </button>
     </nav>
 
-    <div class="lang-list">
+    <div class="lang-list" :class="{active: lang}" v-click-outside="closeLang">
       <button class="lang-list__item" @click="changeLanguage('eu')"><country-flag country='eu' size='normal'/></button>
       <button class="lang-list__item" @click="changeLanguage('ru')"><country-flag country='ru' size='normal'/></button>
       <button class="lang-list__item" @click="changeLanguage('ua')"><country-flag country='ua' size='normal'/></button>
+      <button class="lang-list__arrow" @click="toggleLang()"><Arrow-right-bold class="arrow-right" /></button>
     </div>
 
     <router-view class="router"></router-view>
@@ -28,6 +29,7 @@
 <script>
   import ClickOutside from 'vue-click-outside'
   import MenuIcon from "vue-material-design-icons/Menu.vue"
+  import ArrowRightBold from "vue-material-design-icons/ArrowRightBold.vue"
   import CountryFlag from 'vue-country-flag'
   export default {
     directives: {
@@ -35,11 +37,13 @@
     },
     components: {
       MenuIcon,
+      ArrowRightBold,
       CountryFlag
     },
     data() {
       return {
         isActive: false,
+        lang: false,
         firstState: true
       }
     },
@@ -48,7 +52,13 @@
         this.isActive = !this.isActive;
         this.firstState = false;
       },
-      clickOutside(){
+      toggleLang() {
+        this.lang = !this.lang;
+      },
+      closeLang() {
+        this.lang = false;
+      },
+      closeNav(){
         this.isActive = false;
       },
       changeLanguage(val){
@@ -186,10 +196,59 @@
     }
     .lang-list {
       position: absolute;
-      top: 80px;
-      width: 50px;
-      height: 50px;
+      top: 20%;
+      display: flex;
+      flex-direction: column;
       z-index: 2;
+      background: #fff;
+      transform: translateX(-90%);
+      transition: 0.3s;
+
+      &.active {
+        transform: translateX(0);
+
+        .lang-list__arrow {
+          .arrow-right {
+            transform: rotate(180deg);
+          }
+        }
+      }
+
+      .lang-list__item {
+        background: #fff;
+        margin: 1px 0;
+        border: 1px solid #ccc;
+        cursor: pointer;
+      }
+      .lang-list__arrow {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        left: 102%;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        border: 1px solid #ccc;
+        font-size: 17px;
+        cursor: pointer;
+
+        &:active,
+        &:focus {
+          outline: 1px skyblue solid;
+        }
+
+        .arrow-right {
+          transition: 0.2s;
+          transform-origin: center center;
+
+          .material-design-icon__svg {
+            bottom: 0;
+          }
+        }
+      }
     }
   }
 
