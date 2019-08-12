@@ -6,6 +6,7 @@ import Home from './Home.vue'
 import VueI18n from 'vue-i18n'
 import CountryFlag from 'vue-country-flag'
 import "vue-material-design-icons/styles.css"
+import "./styles/main.scss"
 
 
 Vue.use(VueRouter);
