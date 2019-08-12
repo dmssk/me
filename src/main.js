@@ -4,7 +4,6 @@ import App from './App.vue'
 import Works from './Works.vue'
 import Home from './Home.vue'
 import "vue-material-design-icons/styles.css"
-
 Vue.use(VueRouter);
 
 const routes = [

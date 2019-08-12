@@ -1,7 +1,7 @@
 <template>
   <div id="app">
 
-    <nav id="nav" class="nav" :class="{ active: isActive, inactive: firstState }">
+    <nav id="nav" class="nav" :class="{ active: isActive, inactive: firstState }" v-click-outside="clickOutside">
       <ul class="nav__list">
         <li class="nav__list__item" @click="toggleMenu()">
           <router-link to="/">Home</router-link>
@@ -11,7 +11,7 @@
         </li>
       </ul>
       <button id="menuButton" class="menu-button" @click="toggleMenu()">
-        <menu-icon class="menu-button__icon" id="menuIcon"></menu-icon>
+        <menu-icon />
       </button>
     </nav>
 
@@ -20,9 +20,12 @@
 </template>
 
 <script>
+  import ClickOutside from 'vue-click-outside'
   import MenuIcon from "vue-material-design-icons/Menu.vue"
-
   export default {
+    directives: {
+      ClickOutside
+    },
     components: {
       MenuIcon
     },
@@ -36,9 +39,13 @@
       toggleMenu() {
         this.isActive = !this.isActive;
         this.firstState = false;
+      },
+      clickOutside(){
+        this.isActive = false;
       }
     }
   }
+
 </script>
 
 <style lang="scss">
@@ -46,6 +53,7 @@
     margin: 0;
     padding: 0;
     overflow: hidden;
+    background: #f9f9f9;
   }
   a {
     text-decoration: none;
@@ -163,7 +171,7 @@
       }
     }
     .router {
-      animation: newWindow 1s 0.5s both;
+      animation: newWindow 1s 0.2s both;
     }
   }
 
