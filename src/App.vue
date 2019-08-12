@@ -15,6 +15,12 @@
       </button>
     </nav>
 
+    <div class="lang-list">
+      <button class="lang-list__item" @click="changeLanguage('eu')"><country-flag country='eu' size='normal'/></button>
+      <button class="lang-list__item" @click="changeLanguage('ru')"><country-flag country='ru' size='normal'/></button>
+      <button class="lang-list__item" @click="changeLanguage('ua')"><country-flag country='ua' size='normal'/></button>
+    </div>
+
     <router-view class="router"></router-view>
   </div>
 </template>
@@ -22,12 +28,14 @@
 <script>
   import ClickOutside from 'vue-click-outside'
   import MenuIcon from "vue-material-design-icons/Menu.vue"
+  import CountryFlag from 'vue-country-flag'
   export default {
     directives: {
       ClickOutside
     },
     components: {
-      MenuIcon
+      MenuIcon,
+      CountryFlag
     },
     data() {
       return {
@@ -42,6 +50,9 @@
       },
       clickOutside(){
         this.isActive = false;
+      },
+      changeLanguage(val){
+        this.$i18n.locale = val
       }
     }
   }
@@ -172,6 +183,13 @@
     }
     .router {
       animation: newWindow 1s 0.2s both;
+    }
+    .lang-list {
+      position: absolute;
+      top: 80px;
+      width: 50px;
+      height: 50px;
+      z-index: 2;
     }
   }
 

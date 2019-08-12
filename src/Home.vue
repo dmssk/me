@@ -1,7 +1,23 @@
+<i18n>
+  {
+    "eu": {
+    "hello": "Hi, nice to meet You!"
+    },
+    "ru": {
+    "hello": "Привет, рад знакомству!"
+    },
+    "ua": {
+    "hello": "Привіт, радий знайомству!"
+    }
+  }
+</i18n>
+
 <template>
   <div id="Home">
     <div class="grid container">
-      <div class="grid__item header"></div>
+      <div class="grid__item header">
+        <h1>{{$t('hello')}}</h1>
+      </div>
       <div class="grid__item"></div>
       <div class="grid__item"></div>
     </div>
@@ -9,7 +25,12 @@
 </template>
 
 <script>
+  export default {
+    name: 'app',
+    data() {
 
+    }
+  }
 </script>
 
 
