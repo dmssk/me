@@ -36,40 +36,7 @@
           <h3 class="experience-header">
             {{$t('experienceHeader')}}
           </h3>
-          <ul class="experience-list">
-            <li class="experience-list__item">
-              <div class="progress-bar__wrap" id="css">
-                <div class="progress-bar__item">
-                  <span title="points">90</span>
-                </div>
-              </div>
-              <p>CSS</p>
-            </li>
-            <li class="experience-list__item">
-              <div class="progress-bar__wrap" id="html">
-                <div class="progress-bar__item">
-                  <span title="points">80</span>
-                </div>
-              </div>
-              <p>HTML</p>
-            </li>
-            <li class="experience-list__item">
-              <div class="progress-bar__wrap" id="js">
-                <div class="progress-bar__item">
-                  <span title="points">70</span>
-                </div>
-              </div>
-              <p>JS</p>
-            </li>
-            <li class="experience-list__item">
-              <div class="progress-bar__wrap" id="ps">
-                <div class="progress-bar__item">
-                  <span title="points">80</span>
-                </div>
-              </div>
-              <p>Adobe Photoshop</p>
-            </li>
-          </ul>
+          <progress-bars-list :items="this.skills" />
         </div>
       </div>
     </div>
@@ -78,10 +45,21 @@
 
 <script>
   import styles from "./styles/home.scss"
-
+  import ProgressBarsList from "./components/progressBarsList"
   export default {
     components: {
-      styles
+      styles,
+      ProgressBarsList
+    },
+    data() {
+      return {
+        skills: {
+          'CSS': 90,
+          'HTML': 80,
+          'JS': 70,
+          'Adobe Photoshop': 80
+        }
+      }
     }
   }
 </script>
